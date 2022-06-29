@@ -1,7 +1,7 @@
 /* Licensed Materials - Property of IBM              */
 /* (c) Copyright IBM Corp. 2020. All Rights Reserved.*/
 
-package org.opengroup.osdu.dataset.ibm;
+package org.opengroup.osdu.odatadms.ibm;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -12,9 +12,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.opengroup.osdu.core.common.dms.model.RetrievalInstructionsResponse;
 import org.opengroup.osdu.core.common.dms.model.StorageInstructionsResponse;
-import org.opengroup.osdu.dataset.DatasetIT;
-import org.opengroup.osdu.dataset.ibm.util.CloudStorageUtilIbm;
-import org.opengroup.osdu.dataset.ibm.util.IBMTestUtils;
+import org.opengroup.osdu.odatadms.DatasetIT;
+import org.opengroup.osdu.odatadms.ibm.util.CloudStorageUtilIbm;
+import org.opengroup.osdu.odatadms.ibm.util.IBMTestUtils;
 
 public class TestDatasetIbm extends DatasetIT {
 

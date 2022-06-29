@@ -1,4 +1,4 @@
-package org.opengroup.osdu.dataset;
+package org.opengroup.osdu.odatadms;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Map;

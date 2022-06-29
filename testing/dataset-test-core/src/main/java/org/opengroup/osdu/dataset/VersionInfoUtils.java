@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.opengroup.osdu.dataset;
+package org.opengroup.osdu.odatadms;
 
 import static org.junit.Assert.assertTrue;
 

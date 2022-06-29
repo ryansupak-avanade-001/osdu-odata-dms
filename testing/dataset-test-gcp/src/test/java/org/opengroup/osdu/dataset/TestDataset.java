@@ -15,9 +15,9 @@
  * limitations under the License.
  */
 
-package org.opengroup.osdu.dataset;
+package org.opengroup.osdu.odatadms;
 
-import static org.opengroup.osdu.dataset.util.CloudStorageUtilGcp.COLLECTION_FILE_URI_TEMPLATE;
+import static org.opengroup.osdu.odatadms.util.CloudStorageUtilGcp.COLLECTION_FILE_URI_TEMPLATE;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,19 +34,19 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.opengroup.osdu.dataset.configuration.DatasetConfiguration;
-import org.opengroup.osdu.dataset.configuration.GcpConfig;
-import org.opengroup.osdu.dataset.configuration.MapperConfig;
-import org.opengroup.osdu.dataset.model.IntTestFileCollectionInstructionsItem;
-import org.opengroup.osdu.dataset.model.IntTestFileInstructionsItem;
-import org.opengroup.osdu.dataset.model.IntTestGetCreateUpdateDatasetRegistryResponse;
-import org.opengroup.osdu.dataset.model.request.IntTestGetDatasetRegistryRequest;
-import org.opengroup.osdu.dataset.model.response.IntTestDatasetRetrievalDeliveryItem;
-import org.opengroup.osdu.dataset.model.response.IntTestGetDatasetRetrievalInstructionsResponse;
-import org.opengroup.osdu.dataset.model.response.IntTestGetDatasetStorageInstructionsResponse;
-import org.opengroup.osdu.dataset.util.CloudStorageUtilGcp;
-import org.opengroup.osdu.dataset.util.FileUtils;
-import org.opengroup.osdu.dataset.util.GcpTestUtils;
+import org.opengroup.osdu.odatadms.configuration.DatasetConfiguration;
+import org.opengroup.osdu.odatadms.configuration.GcpConfig;
+import org.opengroup.osdu.odatadms.configuration.MapperConfig;
+import org.opengroup.osdu.odatadms.model.IntTestFileCollectionInstructionsItem;
+import org.opengroup.osdu.odatadms.model.IntTestFileInstructionsItem;
+import org.opengroup.osdu.odatadms.model.IntTestGetCreateUpdateDatasetRegistryResponse;
+import org.opengroup.osdu.odatadms.model.request.IntTestGetDatasetRegistryRequest;
+import org.opengroup.osdu.odatadms.model.response.IntTestDatasetRetrievalDeliveryItem;
+import org.opengroup.osdu.odatadms.model.response.IntTestGetDatasetRetrievalInstructionsResponse;
+import org.opengroup.osdu.odatadms.model.response.IntTestGetDatasetStorageInstructionsResponse;
+import org.opengroup.osdu.odatadms.util.CloudStorageUtilGcp;
+import org.opengroup.osdu.odatadms.util.FileUtils;
+import org.opengroup.osdu.odatadms.util.GcpTestUtils;
 
 public class TestDataset extends Dataset {
 
@@ -73,21 +73,21 @@ public class TestDataset extends Dataset {
 
 	@Override
 	public void should_getUploadLocation() throws Exception {
-		String fileDataset = "?kindSubType=dataset--File." + GcpConfig.getDatasetKindSubType();
+		String fileDataset = "?kindSubType=odatadms--File." + GcpConfig.getDatasetKindSubType();
 		IntTestGetDatasetStorageInstructionsResponse datasetInstructions = getDatasetInstructions(fileDataset);
 		validate_storageLocation(datasetInstructions.getStorageLocation());
 	}
 
 	@Test
 	public void should_getConnectionStringForCollection() throws Exception {
-		String collectionDataset = "?kindSubType=dataset--FileCollection." + GcpConfig.getDatasetKindSubType();
+		String collectionDataset = "?kindSubType=odatadms--FileCollection." + GcpConfig.getDatasetKindSubType();
 		IntTestGetDatasetStorageInstructionsResponse datasetInstructions = getDatasetInstructions(collectionDataset);
 		validate_collectionStorageInstructions(datasetInstructions.getStorageLocation());
 	}
 
 	@Override
 	public void upload_file_register_it_and_retrieve_it() throws Exception {
-		String kindSubType = "?kindSubType=dataset--File." + GcpConfig.getDatasetKindSubType();
+		String kindSubType = "?kindSubType=odatadms--File." + GcpConfig.getDatasetKindSubType();
 
 		//Step 1: Get Storage Instructions for File
 		IntTestGetDatasetStorageInstructionsResponse datasetInstructions = getDatasetInstructions(kindSubType);
@@ -118,7 +118,7 @@ public class TestDataset extends Dataset {
 
 	@Test
 	public void upload_datasetCollection_register_it_and_retrieve_it() throws Exception {
-		String kindSubType = "?kindSubType=dataset--FileCollection." + GcpConfig.getDatasetKindSubType();
+		String kindSubType = "?kindSubType=odatadms--FileCollection." + GcpConfig.getDatasetKindSubType();
 
 		//Step 1: Get Storage Instructions for File
 		IntTestGetDatasetStorageInstructionsResponse datasetInstructions = getDatasetInstructions(kindSubType);

@@ -15,17 +15,17 @@
  * limitations under the License.
  */
 
-package org.opengroup.osdu.dataset.configuration;
+package org.opengroup.osdu.odatadms.configuration;
 
 import com.google.common.collect.ImmutableMap;
 import com.sun.jersey.api.client.ClientResponse;
 import java.io.IOException;
 import lombok.extern.java.Log;
 import org.apache.commons.text.StringSubstitutor;
-import org.opengroup.osdu.dataset.HeaderUtils;
-import org.opengroup.osdu.dataset.TenantUtils;
-import org.opengroup.osdu.dataset.TestUtils;
-import org.opengroup.osdu.dataset.util.FileUtils;
+import org.opengroup.osdu.odatadms.HeaderUtils;
+import org.opengroup.osdu.odatadms.TenantUtils;
+import org.opengroup.osdu.odatadms.TestUtils;
+import org.opengroup.osdu.odatadms.util.FileUtils;
 
 @Log
 public class DatasetConfiguration {
@@ -41,7 +41,7 @@ public class DatasetConfiguration {
 			HeaderUtils.getHeaders(TenantUtils.getTenantName(), token),
 			datasetFileSchema, "");
 
-		log.info("create dataset file schema response status:" + createFileSchemaResponse.getStatus());
+		log.info("create odatadms file schema response status:" + createFileSchemaResponse.getStatus());
 
 		String datasetCollectionSchema = getDatasetSchema(INPUT_DATASET_FILE_COLLECTION_SCHEMA_JSON);
 
@@ -50,7 +50,7 @@ public class DatasetConfiguration {
 				HeaderUtils.getHeaders(TenantUtils.getTenantName(), token),
 				datasetCollectionSchema, "");
 
-		log.info("create dataset collection schema response status:" + createFileSchemaResponse.getStatus());
+		log.info("create odatadms collection schema response status:" + createFileSchemaResponse.getStatus());
 
 		String legalTag = getLegalTag(INPUT_LEGALTAG_JSON);
 

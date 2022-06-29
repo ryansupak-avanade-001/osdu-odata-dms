@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="osdu-dataset" type="Application" factoryName="Application">
+  <configuration default="false" name="osdu-odata-dms" type="Application" factoryName="Application">
     <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-    <option name="MAIN_CLASS_NAME" value="org.opengroup.osdu.dataset.provider.azure.DatasetAzureApplication" />
-    <module name="dataset-azure" />
+    <option name="MAIN_CLASS_NAME" value="org.opengroup.osdu.odatadms.provider.azure.ODataDMSAzureApplication" />
+    <module name="odata-dms-azure" />
     <extension name="net.ashald.envfile">
       <option name="IS_ENABLED" value="true" />
       <option name="IS_SUBST" value="false" />

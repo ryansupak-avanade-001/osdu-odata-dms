@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package org.opengroup.osdu.dataset.util;
+package org.opengroup.osdu.odatadms.util;
 
 public class AwsConfig {
 

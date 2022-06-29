@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.opengroup.osdu.dataset.credentials;
+package org.opengroup.osdu.odatadms.credentials;
 
 import com.google.auth.Credentials;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -25,8 +25,8 @@ import java.io.InputStream;
 import java.util.Objects;
 import java.util.function.Predicate;
 import lombok.extern.java.Log;
-import org.opengroup.osdu.dataset.configuration.GcpConfig;
-import org.opengroup.osdu.dataset.util.DecodedContentExtractor;
+import org.opengroup.osdu.odatadms.configuration.GcpConfig;
+import org.opengroup.osdu.odatadms.util.DecodedContentExtractor;
 
 @Log
 public class StorageServiceAccountCredentialsProvider {

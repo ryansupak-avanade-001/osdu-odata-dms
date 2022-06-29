@@ -14,8 +14,8 @@
 global:
   replicaCount: 1
 config:
-  name: dataset
+  name: odatadms
 image:
-  repository: community.opengroup.org:5555/osdu/platform/system/dataset
+  repository: community.opengroup.org:5555/osdu/platform/system/odatadms
   branch: master
   tag: latest

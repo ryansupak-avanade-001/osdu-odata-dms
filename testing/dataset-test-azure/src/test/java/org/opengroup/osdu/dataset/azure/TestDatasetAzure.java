@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package org.opengroup.osdu.dataset.azure;
+package org.opengroup.osdu.odatadms.azure;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.opengroup.osdu.core.common.dms.model.RetrievalInstructionsResponse;
 import org.opengroup.osdu.core.common.dms.model.StorageInstructionsResponse;
-import org.opengroup.osdu.dataset.DatasetIT;
-import org.opengroup.osdu.dataset.azure.util.AzureTestUtils;
+import org.opengroup.osdu.odatadms.DatasetIT;
+import org.opengroup.osdu.odatadms.azure.util.AzureTestUtils;
 import org.junit.Before;
-import org.opengroup.osdu.dataset.azure.util.CloudStorageUtilAzure;
+import org.opengroup.osdu.odatadms.azure.util.CloudStorageUtilAzure;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

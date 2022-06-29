@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package org.opengroup.osdu.dataset;
+package org.opengroup.osdu.odatadms;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -28,11 +28,11 @@ import org.opengroup.osdu.core.common.model.entitlements.Acl;
 import org.opengroup.osdu.core.common.model.legal.Legal;
 import org.opengroup.osdu.core.common.model.legal.LegalCompliance;
 import org.opengroup.osdu.core.common.model.storage.Record;
-import org.opengroup.osdu.dataset.model.request.IntTestGetDatasetRegistryRequest;
-import org.opengroup.osdu.dataset.model.response.IntTestDatasetRetrievalDeliveryItem;
-import org.opengroup.osdu.dataset.model.response.IntTestGetDatasetRetrievalInstructionsResponse;
-import org.opengroup.osdu.dataset.model.response.IntTestGetDatasetStorageInstructionsResponse;
-import org.opengroup.osdu.dataset.model.shared.TestGetCreateUpdateDatasetRegistryRequest;
+import org.opengroup.osdu.odatadms.model.request.IntTestGetDatasetRegistryRequest;
+import org.opengroup.osdu.odatadms.model.response.IntTestDatasetRetrievalDeliveryItem;
+import org.opengroup.osdu.odatadms.model.response.IntTestGetDatasetRetrievalInstructionsResponse;
+import org.opengroup.osdu.odatadms.model.response.IntTestGetDatasetStorageInstructionsResponse;
+import org.opengroup.osdu.odatadms.model.shared.TestGetCreateUpdateDatasetRegistryRequest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,7 +55,7 @@ public abstract class Dataset extends TestBase {
 	public static void classSetup(String token) throws Exception {
 		// make sure schema is created
 		// String datasetRegistrySchema = "{\n" +
-		// 		"    \"kind\": \"osdu:wks:dataset-registry:0.0.1\",\n" +
+		// 		"    \"kind\": \"osdu:wks:odatadms-registry:0.0.1\",\n" +
 		// 		"    \"schema\": [{\"path\":\"ResourceTypeID\",\"kind\":\"string\",\"ext\":{}},\n" +
 		// 		"        {\"path\":\"ResourceID\",\"kind\":\"string\",\"ext\":{}},\n" +
 		// 		"        {\"path\":\"ResourceSecurityClassification\",\"kind\":\"string\",\"ext\":{}},\n" +
@@ -71,7 +71,7 @@ public abstract class Dataset extends TestBase {
 
 		// make sure legaltag is created
 		String legalBody = "{\t\n" +
-				"\t\"name\": \"public-usa-dataset-1\",\t\n" +
+				"\t\"name\": \"public-usa-odatadms-1\",\t\n" +
 				"\t\"properties\": {\t\t\n" +
 				"\t\t\"countryOfOrigin\":[\"US\"],        \n" +
 				"\t\t\"contractId\":\"A1234\",\n" +
@@ -117,7 +117,7 @@ public abstract class Dataset extends TestBase {
 	@Test
 	public void should_getUploadLocation() throws Exception {
 		ClientResponse response = TestUtils.send("getStorageInstructions", "GET",
-				HeaderUtils.getHeaders(TenantUtils.getTenantName(), testUtils.getToken()), "", "?kindSubType=dataset--File.Generic");
+				HeaderUtils.getHeaders(TenantUtils.getTenantName(), testUtils.getToken()), "", "?kindSubType=odatadms--File.Generic");
 		Assert.assertEquals(200, response.getStatus());
 		
 		// JsonObject json = new JsonParser().parse(response.getEntity(String.class)).getAsJsonObject();
@@ -135,7 +135,7 @@ public abstract class Dataset extends TestBase {
 	@Test
 	public void upload_file_register_it_and_retrieve_it() throws Exception {
 
-		String kindSubType = "dataset--File.Generic";
+		String kindSubType = "odatadms--File.Generic";
 		
 		//Step 1: Get Storage Instructions for File
 		ClientResponse getStorageInstClientResp = TestUtils.send("getStorageInstructions", "GET",
@@ -208,12 +208,12 @@ public abstract class Dataset extends TestBase {
 		Record datasetRegistry = new Record();
 
 		datasetRegistry.setId(id);
-		datasetRegistry.setKind(String.format("%s:wks:dataset--File.Generic:1.0.0", TestUtils.getSchemaAuthority()));		
+		datasetRegistry.setKind(String.format("%s:wks:odatadms--File.Generic:1.0.0", TestUtils.getSchemaAuthority()));
 		
 		//set legal
 		Legal legal = new Legal();
 		HashSet<String> legalTags = new HashSet<>();
-		legalTags.add(String.format("%s-public-usa-dataset-1", TenantUtils.getTenantName()));
+		legalTags.add(String.format("%s-public-usa-odatadms-1", TenantUtils.getTenantName()));
 		legal.setLegaltags(legalTags);
 		HashSet<String> otherRelevantDataCountries = new HashSet<>();
 		otherRelevantDataCountries.add("US");

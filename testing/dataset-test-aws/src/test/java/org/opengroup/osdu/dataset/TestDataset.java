@@ -13,7 +13,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package org.opengroup.osdu.dataset;
+package org.opengroup.osdu.odatadms;
 
 import java.util.HashMap;
 
@@ -22,10 +22,10 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.opengroup.osdu.dataset.model.IntTestFileDeliveryItemAWSImpl;
-import org.opengroup.osdu.dataset.model.IntTestFileUploadLocationAWSImpl;
-import org.opengroup.osdu.dataset.model.response.IntTestDatasetRetrievalDeliveryItem;
-import org.opengroup.osdu.dataset.util.CloudStorageUtilAws;
+import org.opengroup.osdu.odatadms.model.IntTestFileDeliveryItemAWSImpl;
+import org.opengroup.osdu.odatadms.model.IntTestFileUploadLocationAWSImpl;
+import org.opengroup.osdu.odatadms.model.response.IntTestDatasetRetrievalDeliveryItem;
+import org.opengroup.osdu.odatadms.util.CloudStorageUtilAws;
 
 public class TestDataset extends Dataset {
 

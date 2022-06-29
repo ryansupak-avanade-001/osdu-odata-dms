@@ -16,9 +16,9 @@
 --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.opengroup.osdu</groupId>
-	<artifactId>os-dataset</artifactId>
+	<artifactId>os-odata-dms</artifactId>
 	<version>0.16.0-SNAPSHOT</version>
-	<description>Root Dataset Registry Service project</description>
+	<description>Root OData DMS Service project</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -168,11 +168,13 @@
 	</distributionManagement>
 
 	<modules>
-		<module>dataset-core</module>
-		<module>provider/dataset-aws</module>
-		<module>provider/dataset-ibm</module>
-		<module>provider/dataset-gcp</module>
-		<module>provider/dataset-azure</module>
+		<module>odata-dms-core</module>
+		<!--
+		<module>provider/odatadms-aws</module>
+		<module>provider/odatadms-ibm</module>
+		<module>provider/odatadms-gcp</module>
+		-->
+		<module>provider/odata-dms-azure</module>
   </modules>
 
 	<build>

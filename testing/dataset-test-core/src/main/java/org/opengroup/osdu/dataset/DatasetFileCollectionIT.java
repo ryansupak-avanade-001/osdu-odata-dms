@@ -1,4 +1,4 @@
-package org.opengroup.osdu.dataset;
+package org.opengroup.osdu.odatadms;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,8 +14,8 @@ import org.opengroup.osdu.core.common.model.entitlements.Acl;
 import org.opengroup.osdu.core.common.model.legal.Legal;
 import org.opengroup.osdu.core.common.model.legal.LegalCompliance;
 import org.opengroup.osdu.core.common.model.storage.Record;
-import org.opengroup.osdu.dataset.model.shared.TestGetCreateUpdateDatasetRegistryRequest;
-import org.opengroup.osdu.dataset.util.LegalTagUtils;
+import org.opengroup.osdu.odatadms.model.shared.TestGetCreateUpdateDatasetRegistryRequest;
+import org.opengroup.osdu.odatadms.util.LegalTagUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public abstract class DatasetFileCollectionIT extends TestBase {
     @Test
     public void upload_file_register_it_and_retrieve_it() throws Exception {
         Assume.assumeTrue(runTests);
-        String kindSubType = "dataset--FileCollection.Generic";
+        String kindSubType = "odatadms--FileCollection.Generic";
 
         //Step 1: Get Storage Instructions for File
         StorageInstructionsResponse storageInstResponse = storageInstructions(kindSubType);
@@ -153,7 +153,7 @@ public abstract class DatasetFileCollectionIT extends TestBase {
         Record datasetRegistry = new Record();
 
         datasetRegistry.setId(id);
-        datasetRegistry.setKind(String.format("%s:wks:dataset--FileCollection.Generic:1.0.0", TestUtils.getSchemaAuthority()));
+        datasetRegistry.setKind(String.format("%s:wks:odatadms--FileCollection.Generic:1.0.0", TestUtils.getSchemaAuthority()));
 
         //set legal
         Legal legal = new Legal();

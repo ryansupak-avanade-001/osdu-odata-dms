@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package org.opengroup.osdu.dataset.model.shared;
+package org.opengroup.osdu.odatadms.model.shared;
 
 import lombok.Data;
 import org.opengroup.osdu.core.common.model.storage.Record;

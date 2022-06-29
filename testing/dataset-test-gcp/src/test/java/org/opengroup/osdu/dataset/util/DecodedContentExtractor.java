@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.opengroup.osdu.dataset.util;
+package org.opengroup.osdu.odatadms.util;
 
 import java.io.IOException;
 import java.nio.file.Files;

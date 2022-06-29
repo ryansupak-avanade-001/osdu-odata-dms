@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package org.opengroup.osdu.dataset.util;
+package org.opengroup.osdu.odatadms.util;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,14 +33,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.apache.commons.lang3.StringUtils;
 import org.opengroup.osdu.core.aws.s3.S3Config;
-import org.opengroup.osdu.dataset.CloudStorageUtil;
-import org.opengroup.osdu.dataset.model.IntTestCredentials;
-import org.opengroup.osdu.dataset.model.IntTestCredentialsProvider;
-import org.opengroup.osdu.dataset.model.IntTestFileDeliveryItem;
-import org.opengroup.osdu.dataset.model.IntTestFileDeliveryItemAWSImpl;
-import org.opengroup.osdu.dataset.model.IntTestFileUploadLocation;
-import org.opengroup.osdu.dataset.model.IntTestFileUploadLocationAWSImpl;
-import org.opengroup.osdu.dataset.model.IntTestS3Location;
+import org.opengroup.osdu.odatadms.CloudStorageUtil;
+import org.opengroup.osdu.odatadms.model.IntTestCredentials;
+import org.opengroup.osdu.odatadms.model.IntTestCredentialsProvider;
+import org.opengroup.osdu.odatadms.model.IntTestFileDeliveryItem;
+import org.opengroup.osdu.odatadms.model.IntTestFileDeliveryItemAWSImpl;
+import org.opengroup.osdu.odatadms.model.IntTestFileUploadLocation;
+import org.opengroup.osdu.odatadms.model.IntTestFileUploadLocationAWSImpl;
+import org.opengroup.osdu.odatadms.model.IntTestS3Location;
 import org.springframework.util.StreamUtils;
 
 public class CloudStorageUtilAws extends CloudStorageUtil {

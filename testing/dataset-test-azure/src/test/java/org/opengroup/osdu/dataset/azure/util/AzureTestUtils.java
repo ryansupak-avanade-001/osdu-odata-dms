@@ -1,8 +1,8 @@
-package org.opengroup.osdu.dataset.azure.util;
+package org.opengroup.osdu.odatadms.azure.util;
 
 import com.google.common.base.Strings;
 import org.opengroup.osdu.azure.util.AzureServicePrincipal;
-import org.opengroup.osdu.dataset.TestUtils;
+import org.opengroup.osdu.odatadms.TestUtils;
 
 public class AzureTestUtils extends TestUtils {
 

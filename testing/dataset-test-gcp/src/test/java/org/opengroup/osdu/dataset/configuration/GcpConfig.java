@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.opengroup.osdu.dataset.configuration;
+package org.opengroup.osdu.odatadms.configuration;
 
 public class GcpConfig {
 

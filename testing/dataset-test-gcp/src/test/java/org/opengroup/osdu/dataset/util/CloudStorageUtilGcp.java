@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.opengroup.osdu.dataset.util;
+package org.opengroup.osdu.odatadms.util;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -45,13 +45,13 @@ import java.util.logging.Level;
 import javax.ws.rs.HttpMethod;
 import javax.ws.rs.core.MediaType;
 import lombok.extern.java.Log;
-import org.opengroup.osdu.dataset.CloudStorageUtil;
-import org.opengroup.osdu.dataset.configuration.GcpConfig;
-import org.opengroup.osdu.dataset.configuration.MapperConfig;
-import org.opengroup.osdu.dataset.credentials.StorageServiceAccountCredentialsProvider;
-import org.opengroup.osdu.dataset.model.IntTestFileCollectionInstructionsItem;
-import org.opengroup.osdu.dataset.model.IntTestFileCollectionSigningOptionsItem;
-import org.opengroup.osdu.dataset.model.IntTestFileInstructionsItem;
+import org.opengroup.osdu.odatadms.CloudStorageUtil;
+import org.opengroup.osdu.odatadms.configuration.GcpConfig;
+import org.opengroup.osdu.odatadms.configuration.MapperConfig;
+import org.opengroup.osdu.odatadms.credentials.StorageServiceAccountCredentialsProvider;
+import org.opengroup.osdu.odatadms.model.IntTestFileCollectionInstructionsItem;
+import org.opengroup.osdu.odatadms.model.IntTestFileCollectionSigningOptionsItem;
+import org.opengroup.osdu.odatadms.model.IntTestFileInstructionsItem;
 
 
 @Log

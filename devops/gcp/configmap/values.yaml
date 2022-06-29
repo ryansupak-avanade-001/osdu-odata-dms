@@ -1,4 +1,4 @@
-# Default values for dataset-configmap.
+# Default values for odatadms-configmap.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -13,6 +13,6 @@ data:
   googleAudiences: ""
 
 conf:
-  configmap: "dataset-config"
-  appName: "dataset"
+  configmap: "odatadms-config"
+  appName: "odatadms"
   onPremEnabled: false

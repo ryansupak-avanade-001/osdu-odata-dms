@@ -14,20 +14,20 @@
  * limitations under the License.
  */
 
-package org.opengroup.osdu.dataset.util;
+package org.opengroup.osdu.odatadms.util;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.sun.jersey.api.client.ClientResponse;
-import org.opengroup.osdu.dataset.TestUtils;
+import org.opengroup.osdu.odatadms.TestUtils;
 
 import java.util.Map;
 
-import static org.opengroup.osdu.dataset.TestUtils.getTenantName;
+import static org.opengroup.osdu.odatadms.TestUtils.getTenantName;
 
 public class LegalTagUtils {
     public static String createRandomName() {
-        return getTenantName() + "-dataset-" + System.currentTimeMillis();
+        return getTenantName() + "-odatadms-" + System.currentTimeMillis();
     }
 
     public static ClientResponse create(Map<String, String> headers,

@@ -16,9 +16,9 @@
  * limitations under the License.
  */
 
-package org.opengroup.osdu.dataset;
+package org.opengroup.osdu.odatadms;
 
-import org.opengroup.osdu.dataset.model.IntTestFileDeliveryItem;
+import org.opengroup.osdu.odatadms.model.IntTestFileDeliveryItem;
 
 public abstract class CloudStorageUtil {
 

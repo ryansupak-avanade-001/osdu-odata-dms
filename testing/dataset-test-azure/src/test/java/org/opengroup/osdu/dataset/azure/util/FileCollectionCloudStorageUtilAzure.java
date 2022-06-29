@@ -1,9 +1,9 @@
-package org.opengroup.osdu.dataset.azure.util;
+package org.opengroup.osdu.odatadms.azure.util;
 
 import com.azure.storage.file.datalake.DataLakeDirectoryClient;
 import com.azure.storage.file.datalake.DataLakeFileClient;
 import com.azure.storage.file.datalake.DataLakePathClientBuilder;
-import org.opengroup.osdu.dataset.FileCollectionCloudStorageUtil;
+import org.opengroup.osdu.odatadms.FileCollectionCloudStorageUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

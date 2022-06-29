@@ -15,12 +15,12 @@
  * limitations under the License.
  */
 
-package org.opengroup.osdu.dataset.util;
+package org.opengroup.osdu.odatadms.util;
 
 import com.sun.jersey.api.client.Client;
-import org.opengroup.osdu.dataset.TestUtils;
-import org.opengroup.osdu.dataset.configuration.GcpConfig;
-import org.opengroup.osdu.dataset.credentials.GoogleServiceAccount;
+import org.opengroup.osdu.odatadms.TestUtils;
+import org.opengroup.osdu.odatadms.configuration.GcpConfig;
+import org.opengroup.osdu.odatadms.credentials.GoogleServiceAccount;
 
 public class GcpTestUtils extends TestUtils {
 

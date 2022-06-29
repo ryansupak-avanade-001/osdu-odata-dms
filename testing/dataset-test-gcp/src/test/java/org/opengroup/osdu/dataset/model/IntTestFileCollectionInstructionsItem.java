@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.opengroup.osdu.dataset.model;
+package org.opengroup.osdu.odatadms.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;

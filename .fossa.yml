@@ -8,27 +8,27 @@ cli:
   project: Dataset
 analyze:
   modules:
-  - name: os-dataset
+  - name: os-odatadms
     type: mvn
     target: pom.xml
     path: .
-  - name: dataset-core
+  - name: odatadms-core
     type: mvn
-    target: dataset-core/pom.xml
+    target: odatadms-core/pom.xml
     path: .
-  - name: dataset-aws
+  - name: odatadms-aws
     type: mvn
-    target: provider/dataset-aws/pom.xml
+    target: provider/odatadms-aws/pom.xml
     path: .
-  - name: dataset-ibm
+  - name: odatadms-ibm
     type: mvn
-    target: provider/dataset-ibm/pom.xml
+    target: provider/odatadms-ibm/pom.xml
     path: .
-  - name: dataset-gcp
+  - name: odatadms-gcp
     type: mvn
-    target: provider/dataset-gcp/pom.xml
+    target: provider/odatadms-gcp/pom.xml
     path: .
-  - name: dataset-azure
+  - name: odatadms-azure
     type: mvn
-    target: provider/dataset-azure/pom.xml
+    target: provider/odatadms-azure/pom.xml
     path: .

@@ -13,8 +13,8 @@
 #  limitations under the License.
 
 apiVersion: v2
-name: dataset
+name: odatadms
 appVersion: "latest"
-description: Helm Chart for installing dataset service.
+description: Helm Chart for installing odatadms service.
 version: 0.1.0
 type: application

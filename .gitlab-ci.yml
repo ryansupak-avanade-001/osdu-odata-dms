@@ -1,18 +1,18 @@
 variables:
-  AWS_BUILD_SUBDIR: provider/dataset-aws/build-aws
-  AWS_TEST_SUBDIR: testing/dataset-test-aws
-  AWS_SERVICE: dataset
+  AWS_BUILD_SUBDIR: provider/odatadms-aws/build-aws
+  AWS_TEST_SUBDIR: testing/odatadms-test-aws
+  AWS_SERVICE: odatadms
   AWS_ENVIRONMENT: dev
   AWS_DEPLOY_TARGET: EKS
-  AWS_EKS_DEPLOYMENT_NAME: os-dataset
+  AWS_EKS_DEPLOYMENT_NAME: os-odatadms
 
-  IBM_BUILD_SUBDIR: provider/dataset-ibm
-  IBM_INT_TEST_SUBDIR: testing/dataset-test-ibm
+  IBM_BUILD_SUBDIR: provider/odatadms-ibm
+  IBM_INT_TEST_SUBDIR: testing/odatadms-test-ibm
 
   #Azure
-  AZURE_SERVICE: dataset
-  AZURE_BUILD_SUBDIR: provider/dataset-azure
-  AZURE_TEST_SUBDIR: testing/dataset-test-azure
+  AZURE_SERVICE: odatadms
+  AZURE_BUILD_SUBDIR: provider/odatadms-azure
+  AZURE_TEST_SUBDIR: testing/odatadms-test-azure
   AZURE_COVERAGE_THRESHOLD: $AZURE_CODE_COVERAGE_THRESHOLD
 
 include:

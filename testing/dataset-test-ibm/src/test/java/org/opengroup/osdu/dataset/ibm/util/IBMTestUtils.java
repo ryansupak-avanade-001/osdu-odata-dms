@@ -1,10 +1,10 @@
 /* Licensed Materials - Property of IBM              */
 /* (c) Copyright IBM Corp. 2020. All Rights Reserved.*/
 
-package org.opengroup.osdu.dataset.ibm.util;
+package org.opengroup.osdu.odatadms.ibm.util;
 
 import org.opengroup.osdu.core.ibm.util.IdentityClient;
-import org.opengroup.osdu.dataset.TestUtils;
+import org.opengroup.osdu.odatadms.TestUtils;
 
 import com.google.common.base.Strings;
 

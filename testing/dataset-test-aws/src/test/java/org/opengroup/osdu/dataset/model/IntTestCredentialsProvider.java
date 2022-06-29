@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package org.opengroup.osdu.dataset.model;
+package org.opengroup.osdu.odatadms.model;
 
 import com.amazonaws.auth.AWSSessionCredentials;
 import com.amazonaws.auth.AWSSessionCredentialsProvider;

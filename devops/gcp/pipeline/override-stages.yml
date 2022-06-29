@@ -1,5 +1,5 @@
 variables:
-  OSDU_GCP_SERVICE: dataset
+  OSDU_GCP_SERVICE: odatadms
   OSDU_GCP_VENDOR: gcp
 
 osdu-gcp-test:

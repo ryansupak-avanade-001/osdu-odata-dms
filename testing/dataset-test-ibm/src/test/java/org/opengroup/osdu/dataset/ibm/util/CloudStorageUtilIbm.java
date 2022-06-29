@@ -1,12 +1,12 @@
 /* Licensed Materials - Property of IBM              */
 /* (c) Copyright IBM Corp. 2020. All Rights Reserved.*/
 
-package org.opengroup.osdu.dataset.ibm.util;
+package org.opengroup.osdu.odatadms.ibm.util;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.opengroup.osdu.dataset.CloudStorageUtil;
-import org.opengroup.osdu.dataset.TestUtils;
+import org.opengroup.osdu.odatadms.CloudStorageUtil;
+import org.opengroup.osdu.odatadms.TestUtils;
 
 import com.sun.jersey.api.client.ClientResponse;
 

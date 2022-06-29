@@ -22,9 +22,9 @@ trigger:
       - /**/*.md
       - .gitignore
       - /docs
-      - /provider/dataset-aws
-      - /provider/dataset-gcp
-      - /provider/dataset-ibm
+      - /provider/odatadms-aws
+      - /provider/odatadms-gcp
+      - /provider/odatadms-ibm
 
 resources:
   repositories:
@@ -41,7 +41,7 @@ variables:
   - group: 'Azure - OSDU Secrets'
 
   - name: serviceName
-    value: "dataset"
+    value: "odatadms"
   - name: chartPath
     value: "devops/azure/chart"
   - name: valuesFile
@@ -58,8 +58,8 @@ stages:
     parameters:
       mavenGoal: 'package'
       mavenPublishJUnitResults: true
-      serviceCoreMavenOptions: '-pl dataset-core -Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
-      mavenOptions: '-pl provider/dataset-azure -Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
+      serviceCoreMavenOptions: '-pl odatadms-core -Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
+      mavenOptions: '-pl provider/odatadms-azure -Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
       copyFileContents: |
         pom.xml
         provider/dataset-azure/pom.xml
@@ -74,7 +74,7 @@ stages:
       serviceName: ${{ variables.serviceName }}
       chartPath: ${{ variables.chartPath }}
       valuesFile: ${{ variables.valuesFile }}
-      testCoreMavenPomFile: 'testing/dataset-test-core/pom.xml'
+      testCoreMavenPomFile: 'testing/odatadms-test-core/pom.xml'
       testCoreMavenOptions: '-Dmaven.repo.local=$(MAVEN_CACHE_FOLDER)'
       skipDeploy: ${{ variables.SKIP_DEPLOY }}
       skipTest: ${{ variables.SKIP_TESTS }}

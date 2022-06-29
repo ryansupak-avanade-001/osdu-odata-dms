@@ -1,7 +1,7 @@
-package org.opengroup.osdu.dataset.azure.util;
+package org.opengroup.osdu.odatadms.azure.util;
 
-import org.opengroup.osdu.dataset.CloudStorageUtil;
-import org.opengroup.osdu.dataset.TestUtils;
+import org.opengroup.osdu.odatadms.CloudStorageUtil;
+import org.opengroup.osdu.odatadms.TestUtils;
 
 import com.sun.jersey.api.client.ClientResponse;
 

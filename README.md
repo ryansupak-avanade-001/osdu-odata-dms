@@ -119,7 +119,7 @@ deploy resources to the AWS console, see the deployment section below.
 
     The port and path for the service endpoint can be configured in ```application.properties``` in the provider folder as following. If not specified, then  the web container (ex. Tomcat) default is used: 
     ```bash
-    server.servlet.contextPath=/api/dataset/v1/
+    server.servlet.contextPath=/api/odatadms/v1/
     server.port=8080
     ```
 

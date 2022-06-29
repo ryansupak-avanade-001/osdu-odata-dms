@@ -57,9 +57,9 @@ spec:
           periodSeconds: 10
         env:
         - name: spring.application.name
-          value: dataset
+          value: odatadms
         - name: server.servlet.contextPath
-          value: /api/dataset/v1/
+          value: /api/odatadms/v1/
         - name: server_port
           value: "80"
         - name: ACCEPT_HTTP  # TEMPORARY UNTIL HTTPS

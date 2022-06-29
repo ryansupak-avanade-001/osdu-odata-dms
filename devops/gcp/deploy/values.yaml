@@ -1,4 +1,4 @@
-# Default values for dataset-deploy.
+# Default values for odatadms-deploy.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -12,8 +12,8 @@ data:
   image: ""
 
 conf:
-  configmap: "dataset-config"
-  postgresSecretName: "dataset-postgres-secret"
-  appName: "dataset"
+  configmap: "odatadms-config"
+  postgresSecretName: "odatadms-postgres-secret"
+  appName: "odatadms"
   onPremEnabled: false
   domain: ""

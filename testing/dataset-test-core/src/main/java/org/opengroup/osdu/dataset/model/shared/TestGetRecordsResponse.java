@@ -15,7 +15,7 @@
 
 //TODO: move this to os-core-common
 
-package org.opengroup.osdu.dataset.model.shared;
+package org.opengroup.osdu.odatadms.model.shared;
 
 import lombok.Data;
 import org.opengroup.osdu.core.common.model.storage.Record;

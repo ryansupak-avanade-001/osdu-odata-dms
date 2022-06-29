@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.opengroup.osdu.dataset.credentials;
+package org.opengroup.osdu.odatadms.credentials;
 
 import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.google.gson.JsonObject;

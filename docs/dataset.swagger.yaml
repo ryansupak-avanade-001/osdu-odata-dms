@@ -9,15 +9,15 @@ info:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0'
 # host: 'localhost:8080'
-# basePath: /api/dataset/v1
+# basePath: /api/odatadms/v1
 tags:
-  - name: dataset-api
+  - name: odatadms-api
     description: Dataset Api
 paths:
   /getDatasetRegistry:
     get:
       tags:
-          - dataset-api
+          - odatadms-api
       summary: getDatasetRegistry
       operationId: getDatasetRegistryUsingGET
       consumes:
@@ -33,10 +33,10 @@ paths:
           default: "opendes"
         - name: id
           in: query
-          description: "dataset registry id"
+          description: "odatadms registry id"
           required: true
           type: string
-          default: "opendes:dataset--File.Generic:8118591ee2a24eada7152e54b369e99a"
+          default: "opendes:odatadms--File.Generic:8118591ee2a24eada7152e54b369e99a"
       responses:
         '200':
           description: OK
@@ -52,7 +52,7 @@ paths:
           description: Internal Server Error
     post:
       tags:
-          - dataset-api
+          - odatadms-api
       summary: getDatasetRegistries
       operationId: getDatasetRegistryUsingPOST
       consumes:
@@ -88,7 +88,7 @@ paths:
   /registerDataset:
     put:
       tags:
-        - dataset-api
+        - odatadms-api
       summary: createOrUpdateDatasetRegistries
       operationId: createOrUpdateDatasetRegistryUsingPUT
       consumes:
@@ -125,7 +125,7 @@ paths:
   /getStorageInstructions:
     get:
       tags:
-          - dataset-api
+          - odatadms-api
       summary: get storage/upload location for datasets
       operationId: getDatasetUploadInfoUsingGET
       consumes:
@@ -144,7 +144,7 @@ paths:
           description: subType of the kind (partition:wks:kindSubType:version)
           required: true
           type: string
-          default: "dataset--File.Generic"
+          default: "odatadms--File.Generic"
       responses:
         '200':
           description: OK
@@ -161,7 +161,7 @@ paths:
   /getRetrievalInstructions:
     get:
       tags:
-          - dataset-api
+          - odatadms-api
       summary: getDatasetRetrievalInstructions
       operationId: getStorageRetrievalInfoUsingGET
       consumes:
@@ -177,10 +177,10 @@ paths:
           default: "opendes"
         - name: datasetRegistryId
           in: query
-          description: "dataset registry id"
+          description: "odatadms registry id"
           required: true
           type: string
-          default: "opendes:dataset--File.Generic:8118591ee2a24eada7152e54b369e99a"
+          default: "opendes:odatadms--File.Generic:8118591ee2a24eada7152e54b369e99a"
       responses:
         '200':
           description: OK
@@ -196,7 +196,7 @@ paths:
           description: Internal Server Error
     post:
       tags:
-          - dataset-api
+          - odatadms-api
       summary: getDatasetRetrievalInstructions
       operationId: getStorageRetrievalInfoUsingPOST
       consumes:
@@ -233,7 +233,7 @@ paths:
   /storageInstructions:
     get:
       tags:
-        - dataset-api
+        - odatadms-api
       summary: Generate storage instructions (Eg - Signed URLs) for datasets
       operationId: storageInstructions
       consumes:
@@ -252,7 +252,7 @@ paths:
           description: subType of the kind (partition:wks:kindSubType:version)
           required: true
           type: string
-          default: "dataset--File.Generic"
+          default: "odatadms--File.Generic"
       responses:
         '200':
           description: OK
@@ -270,8 +270,8 @@ paths:
   /retrievalInstructions:
     get:
       tags:
-        - dataset-api
-      summary: Generate retrieval instructions (Eg - Signed URLs) for single dataset
+        - odatadms-api
+      summary: Generate retrieval instructions (Eg - Signed URLs) for single odatadms
       operationId: retrievalInstructions
       consumes:
         - application.json
@@ -289,7 +289,7 @@ paths:
           description: "Dataset registry id"
           required: true
           type: string
-          default: "opendes:dataset--File.Generic:8118591ee2a24eada7152e54b369e99a"
+          default: "opendes:odatadms--File.Generic:8118591ee2a24eada7152e54b369e99a"
       responses:
         '200':
           description: OK
@@ -305,7 +305,7 @@ paths:
           description: Internal Server Error
     post:
       tags:
-        - dataset-api
+        - odatadms-api
       summary: Generate retrieval instructions (Eg - Signed URLs) for multiple datasets
       operationId: retrievalInstructionsWithPost
       consumes:
@@ -354,7 +354,7 @@ definitions:
         type: array
         items:
           type: string
-          example: "opendes:dataset--File.Generic:8118591ee2a24eada7152e54b369e99a"
+          example: "opendes:odatadms--File.Generic:8118591ee2a24eada7152e54b369e99a"
   CreateUpdateDatasetRegistryRequest:
     type: object
     properties:
@@ -381,11 +381,11 @@ definitions:
     properties:
       id:
         type: string
-        example: 'opendes:dataset--File.Generic:8118591ee2a24eada7152e54b369e99a'
+        example: 'opendes:odatadms--File.Generic:8118591ee2a24eada7152e54b369e99a'
         description: 'Unique identifier in whole Data Ecosystem. When not provided, Data Ecosystem will create and assign an id to the record. Must follow the naming convention: {Data-Partition-Id}:{object-type}:{uuid}.'
       kind:
         type: string
-        example: 'osdu:wks:dataset--File.Generic:1.0.0'
+        example: 'osdu:wks:odatadms--File.Generic:1.0.0'
         description: Record kind for which the schema information is applied to.
       namespace:
         type: string
@@ -414,11 +414,11 @@ definitions:
     properties:
       id:
         type: string
-        example: 'opendes:dataset--File.Generic:8118591ee2a24eada7152e54b369e99a'
+        example: 'opendes:odatadms--File.Generic:8118591ee2a24eada7152e54b369e99a'
         description: 'Unique identifier in whole Data Ecosystem. When not provided, Data Ecosystem will create and assign an id to the record. Must follow the naming convention: {Data-Partition-Id}:{kind-sub-type}:{uuid}.'
       kind:
         type: string
-        example: 'osdu:wks:dataset--File.Generic:1.0.0'
+        example: 'osdu:wks:odatadms--File.Generic:1.0.0'
         description: Record kind for which the schema information is applied to.
       namespace:
         type: string
@@ -494,7 +494,7 @@ definitions:
         type: array
         items:
           type: string
-          example: "opendes-public-usa-dataset"
+          example: "opendes-public-usa-odatadms"
       otherRelevantDataCountries:
         type: array
         items:
@@ -542,7 +542,7 @@ definitions:
           properties:
             datasetRegistryId: 
               type: string
-              example: "opendes:dataset--File.Generic:8118591ee2a24eada7152e54b369e99a"
+              example: "opendes:odatadms--File.Generic:8118591ee2a24eada7152e54b369e99a"
             retrievalProperties:
               type: object
               properties:
@@ -594,7 +594,7 @@ definitions:
           properties:
             datasetRegistryId:
               type: string
-              example: "opendes:dataset--File.Generic:8118591ee2a24eada7152e54b369e99a"
+              example: "opendes:odatadms--File.Generic:8118591ee2a24eada7152e54b369e99a"
             retrievalProperties:
               type: object
               properties:

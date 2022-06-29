@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.opengroup.osdu.dataset;
+package org.opengroup.osdu.odatadms;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -43,10 +43,10 @@ import org.opengroup.osdu.core.common.model.entitlements.Acl;
 import org.opengroup.osdu.core.common.model.legal.Legal;
 import org.opengroup.osdu.core.common.model.legal.LegalCompliance;
 import org.opengroup.osdu.core.common.model.storage.Record;
-import org.opengroup.osdu.dataset.model.shared.TestGetCreateUpdateDatasetRegistryRequest;
-import org.opengroup.osdu.dataset.util.CloudStorageUtilGcp;
-import org.opengroup.osdu.dataset.util.GcpTestUtils;
-import org.opengroup.osdu.dataset.util.LegalTagUtils;
+import org.opengroup.osdu.odatadms.model.shared.TestGetCreateUpdateDatasetRegistryRequest;
+import org.opengroup.osdu.odatadms.util.CloudStorageUtilGcp;
+import org.opengroup.osdu.odatadms.util.GcpTestUtils;
+import org.opengroup.osdu.odatadms.util.LegalTagUtils;
 
 public class TestDatasetIT extends TestBase {
 
@@ -95,7 +95,7 @@ public class TestDatasetIT extends TestBase {
 
   @Test
   public void upload_file_register_it_and_retrieve_it() throws Exception {
-    String kindSubType = "dataset--File.Generic";
+    String kindSubType = "odatadms--File.Generic";
 
     //Step 1: Get Storage Instructions for File
     StorageInstructionsResponse getStorageInstResponse = storageInstructions(kindSubType);
@@ -138,7 +138,7 @@ public class TestDatasetIT extends TestBase {
 
   @Test
   public void upload_multiple_files_register_it_and_retrieve_it() throws Exception {
-    String kindSubType = "dataset--File.Generic";
+    String kindSubType = "odatadms--File.Generic";
 
     //Step 1: Get Storage Instructions for File 1
     StorageInstructionsResponse getStorageInstResponse1 = storageInstructions(kindSubType);
@@ -199,7 +199,7 @@ public class TestDatasetIT extends TestBase {
 
   @Test
   public void invalid_kind_subtype_returns_400() throws Exception {
-    String kindSubType = "dataset--Foo.Generic";
+    String kindSubType = "odatadms--Foo.Generic";
     getTestStorageInstructions(kindSubType, 400);
   }
 
@@ -276,7 +276,7 @@ public class TestDatasetIT extends TestBase {
 
     datasetRegistry.setId(id);
     datasetRegistry.setKind(
-        String.format("%s:wks:dataset--File.Generic:1.0.0", TestUtils.getSchemaAuthority()));
+        String.format("%s:wks:odatadms--File.Generic:1.0.0", TestUtils.getSchemaAuthority()));
 
     //set legal
     Legal legal = new Legal();
