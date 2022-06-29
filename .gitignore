@@ -1,27 +1,42 @@
+HELP.md
 target/
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-pom.xml.next
-release.properties
-dependency-reduced-pom.xml
-buildNumber.properties
-.mvn/timing.properties
-**/.idea/**
-**/target/**
-*.iml
+bin/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
 .classpath
 .factorypath
 .project
-.settings/
-.vscode/
-.DS_Store
-*.env
-.envrc
-/dist/
+.settings
+.springBeans
+.sts4-cache
 
-# Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
-!/.mvn/wrapper/maven-wrapper.jar
-/.gradle/
-/bin/
-.sts4*
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+.gradle/
+
+### macOS ###
+*.DS_Store
+
+### Integration tests ###
+.gradle
+
+### Environment Configuration ###
+*.env

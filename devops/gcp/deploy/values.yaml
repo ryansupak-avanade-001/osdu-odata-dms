@@ -1,0 +1,19 @@
+# Default values for dataset-deploy.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+data:
+  requestsCpu: "0.1"
+  requestsMemory: "256M"
+  limitsCpu: "1"
+  limitsMemory: "1G"
+  serviceAccountName: ""
+  imagePullPolicy: "IfNotPresent"
+  image: ""
+
+conf:
+  configmap: "dataset-config"
+  postgresSecretName: "dataset-postgres-secret"
+  appName: "dataset"
+  onPremEnabled: false
+  domain: ""

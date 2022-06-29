@@ -5,18 +5,30 @@ version: 2
 cli:
   server: https://app.fossa.com
   fetcher: custom
-  project: Odata-dms
+  project: Dataset
 analyze:
   modules:
-  - name: os-odata-dms
+  - name: os-dataset
     type: mvn
     target: pom.xml
     path: .
-  - name: odata-dms-core
+  - name: dataset-core
     type: mvn
-    target: odata-dms-core/pom.xml
+    target: dataset-core/pom.xml
     path: .
-  - name: odata-dms-azure
+  - name: dataset-aws
     type: mvn
-    target: provider/odata-dms-azure/pom.xml
+    target: provider/dataset-aws/pom.xml
+    path: .
+  - name: dataset-ibm
+    type: mvn
+    target: provider/dataset-ibm/pom.xml
+    path: .
+  - name: dataset-gcp
+    type: mvn
+    target: provider/dataset-gcp/pom.xml
+    path: .
+  - name: dataset-azure
+    type: mvn
+    target: provider/dataset-azure/pom.xml
     path: .
