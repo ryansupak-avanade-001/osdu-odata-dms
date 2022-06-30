@@ -37,7 +37,7 @@ import org.springframework.web.context.annotation.RequestScope;
 @RequestMapping("/")
 @RequestScope
 @Validated
-public class ODataDmsApi {
+public class ODataDMSApi {
 
     @Inject
 	private DpsHeaders headers;
@@ -53,14 +53,13 @@ public class ODataDmsApi {
 	public ResponseEntity<Object> retrievalInstructions_post
 	(@RequestBody @Valid @NotNull GetODataQueryRequest request)
 	{
-		return getRetrievalInstructions(request.datasetRegistryIds);
-		//return request;
+		ResponseEntity response = getRetrievalInstructions(request.datasetRegistryIds);
+		return response;
 	}
 
 	private ResponseEntity<Object> getRetrievalInstructions(List<String> datasetRegistryIds)
 	{
 		Object response = this.ODataDmsService.getRetrievalInstructions(datasetRegistryIds);
-		this.auditLogger.readRetrievalInstructionsSuccess(Collections.singletonList(response.toString()));
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 

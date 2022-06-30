@@ -18,11 +18,18 @@ import java.util.*;
 import java.text.MessageFormat;
 import javax.inject.Inject;
 import lombok.RequiredArgsConstructor;
+import org.opengroup.osdu.core.common.dms.model.DatasetRetrievalProperties;
 import org.opengroup.osdu.core.common.dms.model.RetrievalInstructionsResponse;
 import org.opengroup.osdu.core.common.http.json.HttpResponseBodyMapper;
 import org.opengroup.osdu.core.common.model.http.DpsHeaders;
+
+import org.opengroup.osdu.odatadms.model.response.DatasetRetrievalDeliveryItem;
+import org.opengroup.osdu.odatadms.model.response.GetDatasetRetrievalInstructionsResponse;
 import org.opengroup.osdu.odatadms.service.ODataDmsService;
 import org.opengroup.osdu.odatadms.provider.azure.config.ODataDMSConfig;
+import org.opengroup.osdu.odatadms.model.response.ODataDMSRetrievalDeliveryItem;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,13 +38,13 @@ public class ODataDMSServiceImpl implements ODataDmsService {
 
     @Inject
     private DpsHeaders headers;
-
+    @Autowired
     private ODataDMSConfig oDataDMSConfig;
 
     private final HttpResponseBodyMapper bodyMapper;
 
     @Override
-    public RetrievalInstructionsResponse getRetrievalInstructions(List<String> datasetRegistryIds)
+    public GetDatasetRetrievalInstructionsResponse getRetrievalInstructions(List<String> datasetRegistryIds)
     {
         // Process incoming list of datasetRegistryIDs
         // The input format of a datasetRegistryId is similar to the following:
@@ -50,47 +57,58 @@ public class ODataDMSServiceImpl implements ODataDmsService {
         // Currently ODataDMSConfig is coded for only a single OData provider
         //    but that can of course easily be expanded in future.
 
+        GetDatasetRetrievalInstructionsResponse response = new GetDatasetRetrievalInstructionsResponse();
+        List<DatasetRetrievalDeliveryItem> datasetRetrievalDeliveryItemList = new ArrayList<>();
+
         for (String datasetRegistryId : datasetRegistryIds)
         {
+            ODataDMSRetrievalDeliveryItem oDataDMSRetrievalDeliveryItem = new ODataDMSRetrievalDeliveryItem();
+            DatasetRetrievalDeliveryItem datasetRetrievalDeliveryItem = new DatasetRetrievalDeliveryItem();
+
             //the delimiter inside the ID is "--"
-            List<String> tokensFromDatasetRegistryID = Arrays.asList(datasetRegistryId.split("--"));
+            String[] tokensFromDatasetRegistryID = datasetRegistryId.split("--");
             String tokenizedURL = getTokenizedURLFromConfig(datasetRegistryId);
-            String oDataQueryURL = parseODataQueryURL(tokensFromDatasetRegistryID,tokenizedURL);
 
-            //TODO: construct oDataQueryURLs into an array for return
+            oDataDMSRetrievalDeliveryItem.oDataQuery = parseODataQueryURL(tokensFromDatasetRegistryID, tokenizedURL);
+            oDataDMSRetrievalDeliveryItem.recordId = datasetRegistryId;
 
+            Map<String, Object> oDataDMSRetrievalPropertiesItem_Mapped = castODataDMSRetrievalPropertiesItemToMap(oDataDMSRetrievalDeliveryItem);
 
+            datasetRetrievalDeliveryItem.setRetrievalProperties(oDataDMSRetrievalPropertiesItem_Mapped);
 
-            System.out.println(datasetRegistryId);
+            datasetRetrievalDeliveryItemList.add(datasetRetrievalDeliveryItem);
+
         }
-
-        RetrievalInstructionsResponse response = new RetrievalInstructionsResponse();
-
-
-        /*
-        for_each(Map.Entry<String, GetODataQueryRequest> datasetRegistryRequestEntry : datasetRegistryRequestMap.entrySet()) {
-            try {
-                IDmsProvider dmsProvider = dmsFactory.create(headers, kindSubTypeToDmsServiceMap.get(datasetRegistryRequestEntry.getKey()));
-                RetrievalInstructionsResponse entryResponse = dmsProvider.getRetrievalInstructions(datasetRegistryRequestEntry.getValue());
-                response.getDatasets().addAll(entryResponse.getDatasets());
-                response.setProviderKey(entryResponse.getProviderKey());
-            }
-            catch(DmsException e) {
-                handleDmsException(e);
-            }
+        try
+        {
+            response.setDelivery(datasetRetrievalDeliveryItemList);
         }
-        */
+        catch (Exception e)
+        {
+
+        }
 
         return response;
     }
 
-    private String parseODataQueryURL(List<String> tokensFromDatasetRegistryID, String tokenizedURL)
+    private String parseODataQueryURL(String[] tokensFromDatasetRegistryID, String tokenizedURL)
     {
-        return MessageFormat.format(tokenizedURL,tokensFromDatasetRegistryID);
+        MessageFormat urlFormatter = new MessageFormat(tokenizedURL);
+        return urlFormatter.format(tokensFromDatasetRegistryID);
     }
 
     private String getTokenizedURLFromConfig(String dataRegistryID)
     {
         return oDataDMSConfig.getTokenizedURL();
+    }
+
+    private Map<String, Object> castODataDMSRetrievalPropertiesItemToMap(ODataDMSRetrievalDeliveryItem oDataDMSRetrievalDeliveryItem)
+    {
+        Map<String,Object> mappedOutput = new HashMap<String, Object>();
+
+        mappedOutput.put("oDataQuery", oDataDMSRetrievalDeliveryItem.oDataQuery);
+        mappedOutput.put("recordId", oDataDMSRetrievalDeliveryItem.recordId);
+
+        return mappedOutput;
     }
 }

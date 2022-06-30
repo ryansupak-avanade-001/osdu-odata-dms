@@ -45,7 +45,7 @@ public class DatasetDmsApiTest {
     private AuditLogger auditLogger;
 
     @InjectMocks
-    private ODataDmsApi ODataDmsApi;
+    private ODataDMSApi ODataDmsApi;
 
     @Before
     public void setup() {

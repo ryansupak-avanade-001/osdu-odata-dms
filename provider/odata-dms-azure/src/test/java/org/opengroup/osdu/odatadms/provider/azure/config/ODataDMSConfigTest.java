@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.assertEquals;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.opengroup.osdu.odatadms.provider.azure.config.ODataDMSConfig;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ODataDMSConfigTest {

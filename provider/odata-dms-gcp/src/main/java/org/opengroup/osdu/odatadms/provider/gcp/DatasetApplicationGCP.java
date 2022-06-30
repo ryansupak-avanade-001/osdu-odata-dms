@@ -18,7 +18,6 @@
 package org.opengroup.osdu.odatadms.provider.gcp;
 
 import org.opengroup.osdu.odatadms.ODataDMSApplication;
-import org.opengroup.osdu.odatadms.di.DmsClientFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
@@ -27,9 +26,9 @@ import org.springframework.context.annotation.FilterType;
 
 @SpringBootApplication
 @ConfigurationPropertiesScan(basePackages = "org.opengroup")
-@ComponentScan(value = {"org.opengroup.osdu"}, excludeFilters = {
-	@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = {DmsClientFactory.class,
-		ODataDMSApplication.class})})
+//@ComponentScan(value = {"org.opengroup.osdu"}, //excludeFilters = {
+//	@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = {null,
+//		ODataDMSApplication.class})})
 public class DatasetApplicationGCP {
 
 	public static void main(String[] args) {

@@ -16,13 +16,7 @@
 
 package org.opengroup.osdu.odatadms.util;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.opengroup.osdu.core.common.http.HttpResponse;
-import org.opengroup.osdu.core.common.model.http.AppException;
-import org.opengroup.osdu.odatadms.dms.DmsException;
-import org.opengroup.osdu.odatadms.model.request.DmsExceptionResponse;
-import org.springframework.http.HttpStatus;
 
 public final class ExceptionUtils {
     private static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
@@ -31,18 +25,4 @@ public final class ExceptionUtils {
         // avoid initialization
     }
 
-    public static void handleDmsException(DmsException e) {
-        try {
-            HttpResponse response = e.getHttpResponse();
-            String responseBody = response.getBody();
-
-            DmsExceptionResponse body = OBJECT_MAPPER.readValue(responseBody, DmsExceptionResponse.class);
-            throw new AppException(body.getCode(), "DMS Service: " + body.getReason(), body.getMessage());
-        } catch (JsonProcessingException e1) {
-            throw new AppException(
-                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                    HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
-                    "Failed to parse error from DMS Service", e1);
-        }
-    }
 }

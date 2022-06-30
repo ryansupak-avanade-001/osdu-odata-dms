@@ -14,11 +14,8 @@ public class ODataDMSConfig
     // the URLs for the (typically external) target Storage API itself
     // {single curly braces with numbers} are used to signify tokens
     // example:
-    // "https://mock-dsis-api.azurewebsites.net/api/{{2}}/{{3}}/{{4}}/{{5}}?$filter=(native_uid%20eq%20%27{{6}}%27)&$format=json"
-    // Use the method:
-    // String ODataDmsService.parseODataURL(List<String> tokensFromDatasetRegistryID, String tokenizedURL)
-    // to obtain the actual URL
+    // "https://mock-dsis-api.azurewebsites.net/api/{2}/{3}/{4}/{5}?$filter=(native_uid%20eq%20%27{6}%27)&$format=json"
 
-    private String TokenizedURL;
+    private String tokenizedURL;
 
 }

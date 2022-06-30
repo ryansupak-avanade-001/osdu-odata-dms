@@ -20,15 +20,12 @@ package org.opengroup.osdu.odatadms.provider.gcp.dms;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Collections;
-import java.util.Map;
+
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.opengroup.osdu.odatadms.dms.DmsServiceProperties;
 import org.opengroup.osdu.odatadms.provider.gcp.config.GcpConfigProperties;
 import org.opengroup.osdu.odatadms.provider.gcp.model.dataset.DmsServicePropertiesEntity;
 import org.opengroup.osdu.odatadms.provider.gcp.mappers.osm.repository.DmsServicePropertiesRepository;

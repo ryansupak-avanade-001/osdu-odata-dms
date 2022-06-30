@@ -19,12 +19,4 @@ package org.opengroup.osdu.odatadms.provider.gcp.model.dataset;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Map;
-import org.opengroup.osdu.odatadms.model.response.GetDatasetStorageInstructionsResponse;
 
-public class GcpGetDatasetStorageInstructionsResponse extends GetDatasetStorageInstructionsResponse {
-
-  public GcpGetDatasetStorageInstructionsResponse(
-      Object uploadLocation, ObjectMapper objectMapper, String providerKey) {
-    super(objectMapper.convertValue(uploadLocation, Map.class), providerKey);
-  }
-}

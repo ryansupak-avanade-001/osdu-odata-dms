@@ -18,11 +18,10 @@ import java.util.List;
 
 import org.opengroup.osdu.core.common.dms.model.RetrievalInstructionsResponse;
 import org.opengroup.osdu.odatadms.model.response.GetDatasetRetrievalInstructionsResponse;
-import org.opengroup.osdu.odatadms.model.response.GetDatasetStorageInstructionsResponse;
 
 public interface ODataDmsService {
 
-    default RetrievalInstructionsResponse getRetrievalInstructions(List<String> datasetRegistryIds) {
+    default GetDatasetRetrievalInstructionsResponse getRetrievalInstructions(List<String> datasetRegistryIds) {
         return null;
     }
 }
