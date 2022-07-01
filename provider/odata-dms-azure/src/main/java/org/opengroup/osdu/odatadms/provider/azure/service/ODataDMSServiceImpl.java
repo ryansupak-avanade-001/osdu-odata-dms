@@ -44,7 +44,7 @@ public class ODataDMSServiceImpl implements ODataDmsService {
     private final HttpResponseBodyMapper bodyMapper;
 
     @Override
-    public GetDatasetRetrievalInstructionsResponse getRetrievalInstructions(List<String> datasetRegistryIds)
+    public RetrievalInstructionsResponse getRetrievalInstructions(List<String> datasetRegistryIds)
     {
         // Process incoming list of datasetRegistryIDs
         // The input format of a datasetRegistryId is similar to the following:
@@ -57,13 +57,13 @@ public class ODataDMSServiceImpl implements ODataDmsService {
         // Currently ODataDMSConfig is coded for only a single OData provider
         //    but that can of course easily be expanded in future.
 
-        GetDatasetRetrievalInstructionsResponse response = new GetDatasetRetrievalInstructionsResponse();
-        List<DatasetRetrievalDeliveryItem> datasetRetrievalDeliveryItemList = new ArrayList<>();
+        RetrievalInstructionsResponse response = new RetrievalInstructionsResponse();
+        List<DatasetRetrievalProperties> datasetRetrievalPropertiesList = new ArrayList<>();
 
         for (String datasetRegistryId : datasetRegistryIds)
         {
             ODataDMSRetrievalDeliveryItem oDataDMSRetrievalDeliveryItem = new ODataDMSRetrievalDeliveryItem();
-            DatasetRetrievalDeliveryItem datasetRetrievalDeliveryItem = new DatasetRetrievalDeliveryItem();
+            DatasetRetrievalProperties datasetRetrievalProperties = new DatasetRetrievalProperties();
 
             //the delimiter inside the ID is "--"
             String[] tokensFromDatasetRegistryID = datasetRegistryId.split("--");
@@ -73,15 +73,13 @@ public class ODataDMSServiceImpl implements ODataDmsService {
             oDataDMSRetrievalDeliveryItem.recordId = datasetRegistryId;
 
             Map<String, Object> oDataDMSRetrievalPropertiesItem_Mapped = castODataDMSRetrievalPropertiesItemToMap(oDataDMSRetrievalDeliveryItem);
-
-            datasetRetrievalDeliveryItem.setRetrievalProperties(oDataDMSRetrievalPropertiesItem_Mapped);
-
-            datasetRetrievalDeliveryItemList.add(datasetRetrievalDeliveryItem);
+            datasetRetrievalProperties.setRetrievalProperties(oDataDMSRetrievalPropertiesItem_Mapped);
+            datasetRetrievalPropertiesList.add(datasetRetrievalProperties);
 
         }
         try
         {
-            response.setDelivery(datasetRetrievalDeliveryItemList);
+            response.setDatasets(datasetRetrievalPropertiesList);
         }
         catch (Exception e)
         {

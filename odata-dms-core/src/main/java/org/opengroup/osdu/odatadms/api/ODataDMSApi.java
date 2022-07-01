@@ -13,6 +13,7 @@
 // limitations under the License.
 
 package org.opengroup.osdu.odatadms.api;
+import org.opengroup.osdu.odatadms.model.request.DeliveryRole;
 import org.opengroup.osdu.odatadms.model.request.GetODataQueryRequest;
 import java.util.Collections;
 import java.util.List;
@@ -26,13 +27,15 @@ import org.opengroup.osdu.odatadms.logging.AuditLogger;
 import org.opengroup.osdu.odatadms.service.ODataDmsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.annotation.RequestScope;
-	
+import org.opengroup.osdu.odatadms.model.request.DeliveryRole;
+
 @RestController
 @RequestMapping("/")
 @RequestScope
@@ -49,7 +52,8 @@ public class ODataDMSApi {
 	private AuditLogger auditLogger;
 
 	@PostMapping(value={"/retrievalInstructions","/getRetrievalInstructions"})
-	//@PreAuthorize("@authorizationFilter.hasRole('" + DeliveryRole.VIEWER + "')")
+	@PreAuthorize("@authorizationFilter.hasRole('" + DeliveryRole.VIEWER + "')")
+	// this was excluded
 	public ResponseEntity<Object> retrievalInstructions_post
 	(@RequestBody @Valid @NotNull GetODataQueryRequest request)
 	{

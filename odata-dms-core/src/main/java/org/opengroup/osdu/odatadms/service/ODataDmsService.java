@@ -21,7 +21,7 @@ import org.opengroup.osdu.odatadms.model.response.GetDatasetRetrievalInstruction
 
 public interface ODataDmsService {
 
-    default GetDatasetRetrievalInstructionsResponse getRetrievalInstructions(List<String> datasetRegistryIds) {
+    default RetrievalInstructionsResponse getRetrievalInstructions(List<String> datasetRegistryIds) {
         return null;
     }
 }
