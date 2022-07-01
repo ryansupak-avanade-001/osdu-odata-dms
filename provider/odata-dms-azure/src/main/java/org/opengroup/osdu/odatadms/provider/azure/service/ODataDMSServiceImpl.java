@@ -50,6 +50,7 @@ public class ODataDMSServiceImpl implements ODataDmsService {
         // The input format of a datasetRegistryId is similar to the following:
         //    "osdu:dataset--Odata.DSIS:Well--Param001--Param002--Param003--Param004--Param005"
         //          {0}             {1}          {2}       {3}       {4}       {5}       {6}
+        // If there more than (7x) "--" delimited parts entries total, use the
         // The output format of the returned URL is similar to the following:
         //    <StorageRestAPIURL>/Param001/Param002/Param003/Param004?$filter=(native_uid%20eq%20%27Param005%27)&$format=json
         // The StorageRestAPIURL (that is, the actual REST API endpoint itself) is obtained from the
@@ -67,7 +68,16 @@ public class ODataDMSServiceImpl implements ODataDmsService {
 
             //the delimiter inside the ID is "--"
             String[] tokensFromDatasetRegistryID = datasetRegistryId.split("--");
-            String tokenizedURL = getTokenizedURLFromConfig(datasetRegistryId);
+
+            String tokenizedURL = "";
+            if (tokensFromDatasetRegistryID.length == 7)
+            {
+                tokenizedURL = getTokenizedURLFromConfig(datasetRegistryId);
+            }
+            if (tokensFromDatasetRegistryID.length == 10)
+            {
+                tokenizedURL = getTokenizedURL_CompositeKeyFromConfig(datasetRegistryId);
+            }
 
             oDataDMSRetrievalDeliveryItem.oDataQuery = parseODataQueryURL(tokensFromDatasetRegistryID, tokenizedURL);
             oDataDMSRetrievalDeliveryItem.recordId = datasetRegistryId;
@@ -98,6 +108,11 @@ public class ODataDMSServiceImpl implements ODataDmsService {
     private String getTokenizedURLFromConfig(String dataRegistryID)
     {
         return oDataDMSConfig.getTokenizedURL();
+    }
+
+    private String getTokenizedURL_CompositeKeyFromConfig(String dataRegistryID)
+    {
+        return oDataDMSConfig.getTokenizedURL_compositeKey();
     }
 
     private Map<String, Object> castODataDMSRetrievalPropertiesItemToMap(ODataDMSRetrievalDeliveryItem oDataDMSRetrievalDeliveryItem)
