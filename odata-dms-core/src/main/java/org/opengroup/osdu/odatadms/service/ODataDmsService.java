@@ -14,14 +14,16 @@
 
 package org.opengroup.osdu.odatadms.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.opengroup.osdu.core.common.dms.model.RetrievalInstructionsResponse;
 import org.opengroup.osdu.odatadms.model.response.GetDatasetRetrievalInstructionsResponse;
 
 public interface ODataDmsService {
 
-    default RetrievalInstructionsResponse getRetrievalInstructions(List<String> datasetRegistryIds) {
+    default RetrievalInstructionsResponse getRetrievalInstructions(List<String> datasetRegistryIds) throws UnsupportedEncodingException, JsonProcessingException {
         return null;
     }
 }

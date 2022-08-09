@@ -18,21 +18,20 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.junit.Assert.assertEquals;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.opengroup.osdu.odatadms.provider.azure.config.ODataDMSConfig;
+import org.opengroup.osdu.odatadms.provider.azure.config.ODataAPIConfig;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ODataDMSConfigTest {
+public class ODataAPIConfigTest {
 
     private final String FILE = "file_name";
     private final String FILE_COLLECTION = "file-collection";
 
     @Test
     public void should_successfully_create_config() {
-        ODataDMSConfig config = new ODataDMSConfig();
+        ODataAPIConfig config = new ODataAPIConfig();
 
-        config.setTokenizedURL(FILE);
+        config.getStorage();
 
-        assertEquals(FILE, config.getTokenizedURL());
     }
 
 }

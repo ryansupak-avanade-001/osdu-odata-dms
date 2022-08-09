@@ -14,23 +14,35 @@ package org.opengroup.osdu.odatadms.provider.azure.service;
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import java.io.UnsupportedEncodingException;
 import java.util.*;
-import java.text.MessageFormat;
 import javax.inject.Inject;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.opengroup.osdu.core.common.dms.model.DatasetRetrievalProperties;
 import org.opengroup.osdu.core.common.dms.model.RetrievalInstructionsResponse;
+import org.opengroup.osdu.core.common.http.HttpRequest;
+import org.opengroup.osdu.core.common.http.HttpResponse;
 import org.opengroup.osdu.core.common.http.json.HttpResponseBodyMapper;
 import org.opengroup.osdu.core.common.model.http.DpsHeaders;
 
-import org.opengroup.osdu.odatadms.model.response.DatasetRetrievalDeliveryItem;
-import org.opengroup.osdu.odatadms.model.response.GetDatasetRetrievalInstructionsResponse;
+import org.opengroup.osdu.core.common.model.storage.Record;
+import org.opengroup.osdu.core.common.model.storage.RecordData;
+import org.opengroup.osdu.odatadms.provider.azure.config.ODataAPIConfig;
 import org.opengroup.osdu.odatadms.service.ODataDmsService;
-import org.opengroup.osdu.odatadms.provider.azure.config.ODataDMSConfig;
 import org.opengroup.osdu.odatadms.model.response.ODataDMSRetrievalDeliveryItem;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
+import org.opengroup.osdu.core.common.http.IHttpClient;
+
+import org.opengroup.osdu.core.common.model.storage.RecordData;
 
 @Service
 @RequiredArgsConstructor
@@ -39,24 +51,18 @@ public class ODataDMSServiceImpl implements ODataDmsService {
     @Inject
     private DpsHeaders headers;
     @Autowired
-    private ODataDMSConfig oDataDMSConfig;
+    private ODataAPIConfig oDataAPIConfig;
 
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    private final IHttpClient httpClient;
     private final HttpResponseBodyMapper bodyMapper;
 
     @Override
-    public RetrievalInstructionsResponse getRetrievalInstructions(List<String> datasetRegistryIds)
-    {
-        // Process incoming list of datasetRegistryIDs
-        // The input format of a datasetRegistryId is similar to the following:
-        //    "osdu:dataset--Odata.DSIS:Well--Param001--Param002--Param003--Param004--Param005"
-        //          {0}             {1}          {2}       {3}       {4}       {5}       {6}
-        // If there more than (7x) "--" delimited parts entries total, use the
-        // The output format of the returned URL is similar to the following:
-        //    <StorageRestAPIURL>/Param001/Param002/Param003/Param004?$filter=(native_uid%20eq%20%27Param005%27)&$format=json
-        // The StorageRestAPIURL (that is, the actual REST API endpoint itself) is obtained from the
-        //    Provider-specific ODataDMSConfig.
-        // Currently ODataDMSConfig is coded for only a single OData provider
-        //    but that can of course easily be expanded in future.
+    public RetrievalInstructionsResponse getRetrievalInstructions(List<String> datasetRegistryIds) throws UnsupportedEncodingException, JsonProcessingException {
+        //for each datasetRegistryID:
+        //call Storage Service and get back the corresponding record.
+        //parse the URL and parse the (singleton) inline params
+        //then parse the contents of PrimaryKey recursively
 
         RetrievalInstructionsResponse response = new RetrievalInstructionsResponse();
         List<DatasetRetrievalProperties> datasetRetrievalPropertiesList = new ArrayList<>();
@@ -66,26 +72,16 @@ public class ODataDMSServiceImpl implements ODataDmsService {
             ODataDMSRetrievalDeliveryItem oDataDMSRetrievalDeliveryItem = new ODataDMSRetrievalDeliveryItem();
             DatasetRetrievalProperties datasetRetrievalProperties = new DatasetRetrievalProperties();
 
-            //the delimiter inside the ID is "--"
-            String[] tokensFromDatasetRegistryID = datasetRegistryId.split("--");
+            //parse request URL to storage
+            String storageURL = oDataAPIConfig.getStorage() + "/records/" + urlEncodeValue(datasetRegistryId);
+            RecordData storageServiceResponse = makeStorageHttpRequest(storageURL);
 
-            String tokenizedURL = "";
-            if (tokensFromDatasetRegistryID.length == 7)
-            {
-                tokenizedURL = getTokenizedURLFromConfig(datasetRegistryId);
-            }
-            if (tokensFromDatasetRegistryID.length == 10)
-            {
-                tokenizedURL = getTokenizedURL_CompositeKeyFromConfig(datasetRegistryId);
-            }
-
-            oDataDMSRetrievalDeliveryItem.oDataQuery = parseODataQueryURL(tokensFromDatasetRegistryID, tokenizedURL);
             oDataDMSRetrievalDeliveryItem.recordId = datasetRegistryId;
+            oDataDMSRetrievalDeliveryItem.oDataQuery = parseReturnURLFromStorageServiceResponse(storageServiceResponse);
 
             Map<String, Object> oDataDMSRetrievalPropertiesItem_Mapped = castODataDMSRetrievalPropertiesItemToMap(oDataDMSRetrievalDeliveryItem);
             datasetRetrievalProperties.setRetrievalProperties(oDataDMSRetrievalPropertiesItem_Mapped);
             datasetRetrievalPropertiesList.add(datasetRetrievalProperties);
-
         }
         try
         {
@@ -99,20 +95,26 @@ public class ODataDMSServiceImpl implements ODataDmsService {
         return response;
     }
 
-    private String parseODataQueryURL(String[] tokensFromDatasetRegistryID, String tokenizedURL)
-    {
-        MessageFormat urlFormatter = new MessageFormat(tokenizedURL);
-        return urlFormatter.format(tokensFromDatasetRegistryID);
+    private RecordData makeStorageHttpRequest(String storageURL) throws JsonProcessingException {
+        //make HTTP request to Storage
+        HttpResponse result = this.httpClient.send(HttpRequest.get().url(storageURL).headers(this.headers.getHeaders()).build());
+        return OBJECT_MAPPER.readValue(result.getBody(), RecordData.class);
+        //return result.getBody();
     }
 
-    private String getTokenizedURLFromConfig(String dataRegistryID)
+    private String parseReturnURLFromStorageServiceResponse(RecordData storageServiceResponse)
     {
-        return oDataDMSConfig.getTokenizedURL();
+        return "URL";
     }
 
-    private String getTokenizedURL_CompositeKeyFromConfig(String dataRegistryID)
+    private String getStorageURLFromConfig()
     {
-        return oDataDMSConfig.getTokenizedURL_compositeKey();
+        return oDataAPIConfig.getStorage();
+    }
+
+    private String urlEncodeValue(String value) throws UnsupportedEncodingException
+    {
+        return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
     }
 
     private Map<String, Object> castODataDMSRetrievalPropertiesItemToMap(ODataDMSRetrievalDeliveryItem oDataDMSRetrievalDeliveryItem)

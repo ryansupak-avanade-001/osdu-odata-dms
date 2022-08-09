@@ -13,8 +13,11 @@
 // limitations under the License.
 
 package org.opengroup.osdu.odatadms.api;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.opengroup.osdu.odatadms.model.request.DeliveryRole;
 import org.opengroup.osdu.odatadms.model.request.GetODataQueryRequest;
+
+import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.List;
 
@@ -55,14 +58,12 @@ public class ODataDMSApi {
 	@PreAuthorize("@authorizationFilter.hasRole('" + DeliveryRole.VIEWER + "')")
 	// this was excluded
 	public ResponseEntity<Object> retrievalInstructions_post
-	(@RequestBody @Valid @NotNull GetODataQueryRequest request)
-	{
+	(@RequestBody @Valid @NotNull GetODataQueryRequest request) throws UnsupportedEncodingException, JsonProcessingException {
 		ResponseEntity response = getRetrievalInstructions(request.datasetRegistryIds);
 		return response;
 	}
 
-	private ResponseEntity<Object> getRetrievalInstructions(List<String> datasetRegistryIds)
-	{
+	private ResponseEntity<Object> getRetrievalInstructions(List<String> datasetRegistryIds) throws UnsupportedEncodingException, JsonProcessingException {
 		Object response = this.ODataDmsService.getRetrievalInstructions(datasetRegistryIds);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
