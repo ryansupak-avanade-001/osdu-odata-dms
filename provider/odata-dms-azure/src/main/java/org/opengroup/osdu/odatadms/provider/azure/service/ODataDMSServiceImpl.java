@@ -20,7 +20,9 @@ import javax.inject.Inject;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.opencensus.trace.Link;
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.dynamic.scaffold.MethodGraph;
 import org.opengroup.osdu.core.common.dms.model.DatasetRetrievalProperties;
 import org.opengroup.osdu.core.common.dms.model.RetrievalInstructionsResponse;
 import org.opengroup.osdu.core.common.http.HttpRequest;
@@ -104,7 +106,40 @@ public class ODataDMSServiceImpl implements ODataDmsService {
 
     private String parseReturnURLFromStorageServiceResponse(RecordData storageServiceResponse)
     {
-        return "URL";
+        String parsedURL = "";
+
+        LinkedHashMap<String, Object> data = (LinkedHashMap<String, Object>) storageServiceResponse.getData();
+        LinkedHashMap<String, Object> datasetProperties = (LinkedHashMap<String, Object>) data.get("DatasetProperties");
+        LinkedHashMap<String, Object> oDataDataSourceInfo = (LinkedHashMap<String, Object>) datasetProperties.get("ODataDataSourceInfo");
+
+        String baseURL = (String) oDataDataSourceInfo.get("BaseUrl");
+
+        LinkedHashMap<String, Object> inlinePathParams = (LinkedHashMap<String, Object>) oDataDataSourceInfo.get("InlinePathParams");
+        String model = (String) inlinePathParams.get("Model");
+        String version = (String) inlinePathParams.get("Version");
+        String dataSource = (String) inlinePathParams.get("DataSource");
+        String project = (String) inlinePathParams.get("Project");
+        String entityType = (String) inlinePathParams.get("EntityType");
+
+        parsedURL = baseURL + "/" + model + "/" + version + "/" + dataSource + "/" + project + "/" + entityType + "?filter=(";
+
+        LinkedHashMap<String, Object> primaryKey = (LinkedHashMap<String, Object>) oDataDataSourceInfo.get("PrimaryKey");
+
+        //add each PrimaryKey key:value pair to parsed UDL
+        for (Map.Entry<String, Object> entry : primaryKey.entrySet())
+        {
+            String key = entry.getKey();
+            String value = (String) primaryKey.get(key);
+            parsedURL = parsedURL + key + "%20eq%20%27" + value + "%27" + "%20and%20";
+        }
+
+        //remove the final "and" from parsed URL
+        int removeIndex = parsedURL.lastIndexOf("%20and%20");
+        parsedURL = parsedURL.substring(0, removeIndex);
+
+        //finalize the parsing
+        parsedURL = parsedURL + ")&$format=json";
+        return parsedURL;
     }
 
     private String getStorageURLFromConfig()
